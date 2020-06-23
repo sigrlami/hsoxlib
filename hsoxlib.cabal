@@ -1,0 +1,79 @@
+cabal-version: 1.18
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 54debe8b7ef6c0a3dcff3799d072e865a82aacd0611fcb846802a17c9bf1ee5b
+
+name:           hsoxlib
+version:        0.0.1.0
+synopsis:       Haskell bindings to libsox.
+description:    Please see the README on Github at <https://github.com/4eUeP/hsoxlib#readme>
+category:       Sound, Foreign
+homepage:       https://github.com/4eUeP/hsoxlib#readme
+bug-reports:    https://github.com/4eUeP/hsoxlib/issues
+author:         mu <laxcatmu@gmail.com>
+maintainer:     mu <laxcatmu@gmail.com>
+license:        GPL
+license-file:   LICENSE
+build-type:     Simple
+extra-doc-files:
+    README.md
+    csrc/readme.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/4eUeP/hsoxlib
+
+library
+  exposed-modules:
+      Sound.HSoxLib
+      Sound.HSoxLib.Effect
+      Sound.HSoxLib.FFI
+      Sound.HSoxLib.Format
+      Sound.HSoxLib.Information
+      Sound.HSoxLib.Internal.FFI
+      Sound.HSoxLib.Types
+      Sound.HSoxLib.Utils
+  other-modules:
+      Sound.HSoxLib.Internal.Types
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints
+  c-sources:
+      csrc/sox_extra.c
+      csrc/utils.c
+  extra-libraries:
+      sox
+  build-tools:
+      hsc2hs
+  build-depends:
+      base >=4.11 && <5
+    , mtl >=2.2 && <2.3
+    , vector >=0.12 && <0.13
+  default-language: Haskell2010
+
+test-suite hsoxlib-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Test.HSoxLib.TypesSpec
+      Test.HSoxLib.UtilsSpec
+      Test.HSoxLibSpec
+      Paths_hsoxlib
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  c-sources:
+      test/Data/cdata.c
+  build-tools:
+      hsc2hs
+  build-depends:
+      base >=4.11 && <5
+    , hsoxlib
+    , hspec
+    , mtl >=2.2 && <2.3
+    , vector >=0.12 && <0.13
+  default-language: Haskell2010

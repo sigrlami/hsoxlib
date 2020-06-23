@@ -23,6 +23,5 @@ cabal.project.local~
 stack*.yaml.lock
 local*
 Local*
-*.cabal
 *~
 *.swp
